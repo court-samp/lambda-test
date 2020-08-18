@@ -1,12 +1,10 @@
 import boto3
-import sysv
 
-dynamodb = boto3.resource('dynamodb')
+dynamodb = boto3.resource('dynamodb',region_name='us-east-1')
 
-def create_table():
-
+def create_user_table():
     table = dynamodb.create_table(
-        TableName = Customers,
+        TableName = 'Customers',
         KeySchema = [
             {
                 'AttributeName' : 'customerID',
@@ -15,15 +13,7 @@ def create_table():
         ],
         AttributeDefinitions = [
             {
-                'AttributeName' : 'cust_name',
-                'AttributeType' : 'S'
-            },
-            {
-                'AttributeName' : 'Territory',
-                'AttributeType' : 'N'
-            },
-            {
-                'AttributeName' : 'SA'
+                'AttributeName' : 'customerID',
                 'AttributeType' : 'S'
             }
         ],
@@ -34,6 +24,6 @@ def create_table():
     )
     return table
 
-    if __name__ == '__main__':
-        customer_table = create_table()
-        print("Table status:", customer_table.table_status)
+if __name__ == '__main__':
+    customer_table = create_user_table()
+    print("Table status:", customer_table.table_status)
